@@ -1,0 +1,85 @@
+% LaTeX file for resume 
+% This file uses the resume document class (res.cls)
+
+\documentclass[line, margin, 10pt]{res} 
+% the margin option causes section titles to appear to the left of body text 
+\textwidth=5.2in % increase textwidth to get smaller right margin
+
+\begin{document} 
+
+\renewcommand{\namefont}{ \LARGE \bf }
+
+\name{Eliza R. Brock}
+\address{elizabrock@gmail.com}
+\address{(858) 205-9285}
+ 
+\begin{resume} 
+\section{Objective} 
+Kick ass. Perhaps, take names. \\
+Software Engineering.
+
+\section{Education} 
+{\bf B.S. Software Engineering and Computer Science}\\
+Rose-Hulman Institute of Technology\\
+Domain Track in Engineering Management \\
+\\
+{\bf IEEE Certified Software Development Associate}
+\section{Experience}
+ {\bf Web Developer,} W Squared \hfill April 2010 - Current
+ \begin{itemize} \itemsep -2pt  % reduce space between items
+ \item Maintained and developed Rails e-commerce application supporting full order fulfillment lifecycle, including payments, for 40+ boutiques
+ \item Developed exclusively with TDD and pair programming
+ \item Implemented redesigned checkout and payment systems
+ \item Trained with Hashrocket
+ \end{itemize}
+
+ {\bf Developer,} Metova  \hfill August 2009 - April 2010
+ \begin{itemize} \itemsep -2pt  % reduce space between items
+ \item Developed a Java-based mobile payment service from the ground up
+ \item Maintained and developed infrastructure services for mobile applications
+ \item Introduced and implemented multistage deployments
+ \end{itemize}
+
+{\bf Co-founder,} Dusk Productions  \hfill  October 2008 - August 2009 
+\begin{itemize} \itemsep -2pt %reduce space between items
+\item Founded firm focused on product development and consulting
+\item Learned a lot
+\end{itemize}
+
+{\bf Software Development Engineer,} Beckman Coulter \hfill May 2008 - October 2008
+\begin{itemize} \itemsep -2pt %reduce space between items
+\item Reimplemented continuous integration process for geographically distributed team
+\item Created tools to improve project estimation and forecasting
+\end{itemize}
+
+\section{Activities}
+\begin{tabular}[t]{p{1.2in} l}
+\bf{Currently:} & Nashville Ruby on Rails Meetup \\
+& Nashville Dynamic Languages Group \\
+& Yotwa \\
+& ACM \\
+\\
+\bf{Previously:}
+& Railsconf '10 \\
+& Ruby Hoedown '09, '10 \\
+ & Indy.rb '08-'09 \\
+& ACM SIGCSE '06 \\
+& ACM SIGGRAPH '05, '06 \\
+\end{tabular}
+
+% Tabulate Computer Skills; p{3in} defines paragraph 3 inches wide
+\section{Skills}
+   \begin{tabular}[t]{p{1.2in} p{3.75in}}
+    \bf{In Production:} & Ruby, Rails, Java, C\#, PHP, XSLT, XML, APIs, MySQL, Shell Scripting, Unix, Linux, Apache (incl. configuration) \\
+    \\
+    \bf{In General:} & Haskell, Scheme, Erlang, Perl, C++, AspectJ, MSSQL  \\
+    \\
+    \\
+    \bf{Preferred Stack:} & Apache, Passenger, MySQL, Rails, Haml, Sass, RSpec, Unencumbered, Git, Pair Programming \\
+ \end{tabular}
+
+\end{resume} 
+\end{document} 
+
+
+
