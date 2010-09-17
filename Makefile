@@ -1,6 +1,6 @@
-JUNK_FILES= *.aux *.log styles/*.aux
+JUNK_FILES= *.aux *.log styles/*.aux *.dvi
 
-release: clean resume.pdf
+release: clean view
 
 view: resume.pdf
 	open resume.pdf
