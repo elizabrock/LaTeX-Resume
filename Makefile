@@ -4,7 +4,7 @@ release: clean view
 
 view: resume.pdf references.pdf
 	open resume.pdf
-	open references.pdf
+	# open references.pdf
 
 references.pdf: references.dvi
 	dvipdfmx references.dvi

@@ -5,6 +5,7 @@
 *.aux
 *.bbl
 *.blg
+.DS_Store
 *.dvi
 *.glg
 *.glo
