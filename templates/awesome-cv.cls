@@ -84,12 +84,6 @@
 \RequirePackage{parskip}
 % Needed to deal hyperlink
 \RequirePackage[hidelinks,unicode,pdfpagelabels=false]{hyperref}
-\hypersetup{%
-  pdftitle={},
-  pdfauthor={},
-  pdfsubject={},
-  pdfkeywords={}
-}
 % Solves issues Warning: File `cv.out' has changed
 \RequirePackage{bookmark}
 
@@ -125,6 +119,7 @@
 \definecolor{white}{HTML}{FFFFFF}
 \definecolor{black}{HTML}{000000}
 \definecolor{darkgray}{HTML}{333333}
+\definecolor{mediumgray}{HTML}{4f4f4f}
 \definecolor{gray}{HTML}{5D5D5D}
 \definecolor{lightgray}{HTML}{999999}
 % Basic colors
@@ -135,8 +130,7 @@
 \definecolor{blue}{HTML}{6CE0F1}
 % Text colors
 \definecolor{darktext}{HTML}{414141}
-\colorlet{text}{darkgray}
-\colorlet{graytext}{gray}
+\colorlet{graytext}{mediumgray} % Original shade was {darkgray}
 \colorlet{lighttext}{lightgray}
 \colorlet{sectiondivider}{gray}
 % Awesome colors
@@ -179,52 +173,83 @@
 %-------------------------------------------------------------------------------
 % Configure styles for each CV elements
 % For fundamental structures
-\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{32pt}{1em}\headerfontlight\color{graytext} #1}}
-\newcommand*{\headerlastnamestyle}[1]{{\fontsize{32pt}{1em}\headerfont\bfseries\color{text} #1}}
-\newcommand*{\headerpositionstyle}[1]{{\fontsize{7.6pt}{1em}\bodyfont\scshape\color{awesome} #1}}
-\newcommand*{\headeraddressstyle}[1]{{\fontsize{8pt}{1em}\headerfont\itshape\color{lighttext} #1}}
-\newcommand*{\headersocialstyle}[1]{{\fontsize{6.8pt}{1em}\headerfont\color{text} #1}}
-\newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
-\newcommand*{\footerstyle}[1]{{\fontsize{8pt}{1em}\footerfont\scshape\color{lighttext} #1}}
-\newcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor{#1}}}
+
+% Font sizes have been converted to ems, with 9pt as the basis, given that that was the default
+% for most text, completely ignoring the font size specified in the letter class.
+
+% With xetex, ems perform as one would expect from experience in other areas: https://tex.stackexchange.com/a/97970
+
+
+% NOTE: This is a WIP on regularizing the font sizes, colors, etc, that originated in awesome-cv
+\newcommand{\defaultbaselinespacing}{1.22em}
+  % Was 1em at 11pt default letter sizing, so I believe it should be 1.22em with 9pt as our baseline
+\newcommand{\extrabaselinespacing}{1.71em}
+  % Was 1.4em at 11pt default letter sizing, so I believe it should be 1.71em with 9pt as our baseline
+\newcommand{\headerfontsize}{32pt} % Leaving this in points, as I don't want it to scale with body font
+\newcommand{\slightlysmallheaderfontsize}{16pt} % Leaving this in points, as I don't want it to scale with body font
+\newcommand{\smallheaderfontsize}{14pt} % Leaving this in points, as I don't want it to scale with body font
+\newcommand{\smallestheaderfontsize}{1em} % Leaving this in points, as I don't want it to scale with body font
+\newcommand{\largerthandefaultfontsize}{1.22em}
+\newcommand{\slightlylargerthandefaultfontsize}{1em} % was {1.11em} % TODO: Remove
+\newcommand{\defaultfontsize}{1em}
+\newcommand{\slightlysmallerthandefaultfontsize}{.88em}
+\newcommand{\slightlysmallererthandefaultfontsize}{.84em} % TODO: Remove this- I bet the difference is imperceptible
+\newcommand{\smallerthandefaultfontsize}{.77em}
+
+\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{\headerfontsize}{\defaultbaselinespacing}\headerfontlight\color{darkgray} #1}}
+\newcommand*{\headerlastnamestyle}[1]{{\fontsize{\headerfontsize}{\defaultbaselinespacing}\headerfont\bfseries\color{darkgray} #1}}
+\newcommand*{\headerpositionstyle}[1]{{\fontsize{\slightlysmallererthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\scshape\color{awesome} #1}}
+\newcommand*{\headeraddressstyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\headerfont\itshape\color{lighttext} #1}}
+\newcommand*{\headersocialstyle}[1]{{\fontsize{\smallerthandefaultfontsize}{\defaultbaselinespacing}\headerfont\color{graytext} #1}}
+\newcommand*{\headerquotestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\itshape\color{darkgray} #1}}
+\newcommand*{\footerstyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\footerfont\scshape\color{lighttext} #1}}
+\newcommand*{\sectionstyle}[1]{{\fontsize{\slightlysmallheaderfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{darktext}\@sectioncolor{#1}}}
 % ^The above line was modified to work with custom version of sectioncolor:
-\newcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\scshape\textcolor{text}{#1}}}
-\newcommand*{\paragraphstyle}{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text}}
+\newcommand*{\subsectionstyle}[1]{{\fontsize{\smallestheaderfontsize}{\defaultbaselinespacing}\bodyfont\scshape\textcolor{darktext}{#1}}}
+\newcommand*{\paragraphstyle}{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\upshape\color{darktext}}
 
 % For elements of entry
-\newcommand*{\entrytitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\entrypositionstyle}[1]{{\fontsize{8pt}{1em}\bodyfont\scshape\color{graytext} #1}}
-\newcommand*{\entrydatestyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
-\newcommand*{\entrylocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
-\newcommand*{\descriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+\newcommand*{\entrytitlestyle}[1]{{\fontsize{\slightlylargerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{graytext} #1}}
+\newcommand*{\entrycompanystyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{darktext} #1}}
+\newcommand*{\entrydatestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{graytext} #1}}
+\newcommand*{\entrylocationstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{awesome} #1}}
+% TODO: Consider justifying this text, although \\justifying didn't seem to do the trick..
+\newcommand*{\entrycompanynotestyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{graytext} #1}}
+\newcommand*{\entrydescriptionstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\upshape\color{graytext} #1}}
 
 % For elements of subentry
-\newcommand*{\subentrytitlestyle}[1]{{\fontsize{8pt}{1em}\bodyfont\mdseries\color{graytext} #1}}
-\newcommand*{\subentrypositionstyle}[1]{{\fontsize{7pt}{1em}\bodyfont\scshape\color{graytext} #1}}
-\newcommand*{\subentrydatestyle}[1]{{\fontsize{7pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
-\newcommand*{\subentrylocationstyle}[1]{{\fontsize{7pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
-\newcommand*{\subdescriptionstyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+\newcommand*{\subentrytitlestyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\mdseries\color{graytext} #1}}
+\newcommand*{\subentrypositionstyle}[1]{{\fontsize{\smallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\subentrydatestyle}[1]{{\fontsize{\smallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{graytext} #1}}
+\newcommand*{\subentrylocationstyle}[1]{{\fontsize{\smallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{awesome} #1}}
+\newcommand*{\subdescriptionstyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\upshape\color{darktext} #1}}
 
 % For elements of honor
-\newcommand*{\honortitlestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
-\newcommand*{\honorpositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\honordatestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
-\newcommand*{\honorlocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{awesome} #1}}
+\newcommand*{\honortitlestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\color{graytext} #1}}
+\newcommand*{\honorpositionstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\bfseries\color{graytext} #1}}
+\newcommand*{\honordatestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{graytext} #1}}
+\newcommand*{\honorlocationstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{awesome} #1}}
+
+% OG
+\newcommand*{\speakingtitlestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\color{graytext} #1}}
+\newcommand*{\speakingpositionstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\bfseries\color{graytext} #1}}
+\newcommand*{\speakingdatestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{graytext} #1}}
+\newcommand*{\speakinglocationstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{graytext} #1}}
 
 % For elements of skill
-\newcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\skillsetstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
+\newcommand*{\skilltypestyle}[1]{{\fontsize{\slightlylargerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{graytext} #1}}
+\newcommand*{\skillsetstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{darktext} #1}}
 
 % For elements of the cover letter
-\newcommand*{\lettersectionstyle}[1]{{\fontsize{14pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor{#1}}}
+\newcommand*{\lettersectionstyle}[1]{{\fontsize{\smallheaderfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{darktext}\@sectioncolor{#1}}}
 % ^The above line was modified to work with custom version of sectioncolor
-\newcommand*{\recipientaddressstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\scshape\color{graytext} #1}}
-\newcommand*{\recipienttitlestyle}[1]{{\fontsize{11pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\lettertitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\bfseries\color{darktext} \underline{#1}}}
-\newcommand*{\letterdatestyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}
-\newcommand*{\lettertextstyle}{\fontsize{10pt}{1.4em}\bodyfontlight\upshape\color{graytext}}
-\newcommand*{\letternamestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\letterenclosurestyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\slshape\color{lighttext} #1}}
+\newcommand*{\recipientaddressstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\recipienttitlestyle}[1]{{\fontsize{\largerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\lettertitlestyle}[1]{{\fontsize{\slightlylargerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\bfseries\color{darktext} \underline{#1}}}
+\newcommand*{\letterdatestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{graytext} #1}}
+\newcommand*{\lettertextstyle}{\fontsize{\defaultfontsize}{\extrabaselinespacing}\bodyfontlight\upshape\color{graytext}}
+\newcommand*{\letternamestyle}[1]{{\fontsize{\slightlylargerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\letterenclosurestyle}[1]{{\fontsize{\slightlylargerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{lighttext} #1}}
 
 
 %-------------------------------------------------------------------------------
@@ -523,7 +548,8 @@
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://github.com/\@github}{\faSquareGithub\acvHeaderIconSep\@github}%
+          \href{https://github.com/\@github}{\faGithub\acvHeaderIconSep\@github}%
+          % NOTE: The above is my custom adjustment to Awesome-CV - the default icon is \faSquareGithub
         }%
       \ifthenelse{\isundefined{\@gitlab}}%
         {}%
@@ -665,7 +691,8 @@
 % Usage: \cvsubsection{<subsection-title>}
 \newcommand{\cvsubsection}[1]{%
   \vspace{\acvSectionContentTopSkip}
-  \vspace{-3mm}
+  \vspace{-2mm}
+  % ^ Modification from -3 to -2
   \subsectionstyle{#1}
   \phantomsection
 }
@@ -688,20 +715,72 @@
   \end{center}
 }
 % Define an entry of cv information
-% Usage: \cventry{<position>}{<title>}{<location>}{<date>}{<description>}
+% Usage: \cventry{<title>}{<company/position>}{<location>}{<date>}{<note>}{<description>}
 \newcommand*{\cventry}[5]{%
+  \epiccventry{#1}{#2}{}{}{#3}{}{#4}{#5}
+}
+
+% Usage: \cventrywithcompanynote{<title>}{<company/position>}{<company note>}{<location>}{<date>}{<note>}{<description>}
+\newcommand*{\cventrywithcompanynote}[6]{%
+  \epiccventry{#1}{#2}{}{}{#3}{#4}{#5}{#6}
+}
+
+% Usage: \doublecventry{<title>}{<company/position>}{<additional title>}{<additional company/position>}{<location>}{<date>}{<note>}{<description>}
+\newcommand*{\doublecventry}[7]{%
+  \epiccventry{#1}{#2}{#3}{#4}{#5}{}{#6}{#7}
+}
+
+% Internal Usage:
+\newcommand*{\epiccventry}[8]{%
+  \@namedef{positionName}{#1}%
+  \@namedef{positionDate}{#2}%
+  \@namedef{additionalPositionName}{#3}%
+  \@namedef{additionalPositionDate}{#4}%
+  \@namedef{companyName}{#5}%
+  \@namedef{companyNote}{#6}%
+  \@namedef{location}{#7}%
+  \@namedef{description}{#8}%
   \vspace{-2.0mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
-  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-    \ifempty{#2#3}
-      {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-      {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
-      \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-    \ifstrempty{#5}
+  \begin{tabular}[t]{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+    \ifdefempty{\companyName}
+      {\entrytitlestyle{\positionName} & \entrydatestyle{\positionDate} \\}
+      {\entrytitlestyle{\positionName}, \entrycompanystyle{\companyName} & \entrydatestyle{\positionDate} \\}
+    \ifdefempty{\additionalPositionName}
       {}
-      {\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}} \\}
-  \end{tabular*}%
+      {\entrytitlestyle{\additionalPositionName}, \entrycompanystyle{\companyName} & \entrydatestyle{\additionalPositionDate} \\}
+    \ifdefempty{\companyNote}
+      {}
+      % {\entrycompanynotestyle{\companyNote} & \\}
+      % The L here is why it is left aligned and not justified, I think..
+      % {\multicolumn{2}{L{\textwidth}}{\entrycompanynotestyle{\companyNote}} \\}
+      {\multicolumn{2}{L{\textwidth}}{
+        \begin{tabular}[t]{L{.66\textwidth} R{.33\textwidth}}
+          \entrycompanynotestyle{\companyNote} & \\
+        \end{tabular}
+      } \\}
+    \ifdefempty{\description}
+      {}
+      {\multicolumn{2}{L{\textwidth}}{\entrydescriptionstyle{\description}} \\}
+  \end{tabular}%
+}
+
+\newcommand*{\cveducationentry}[5]{%
+  \@namedef{degree}{#1}%
+  \@namedef{university}{#2}%
+  \@namedef{location}{#3}%
+  \@namedef{date}{#4}%
+  \@namedef{description}{#5}%
+  % TODO seperate this out into a table preamble command
+  \vspace{-2.0mm}
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabular}[t]{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}} % TODO: Modularize this to share with the below so that changes are synced
+    \entrytitlestyle{\degree} & \entrydatestyle{\date} \\
+    \entrycompanystyle{\university} & \\
+    \multicolumn{2}{L{\textwidth}}{\entrydescriptionstyle{\description}} \\
+  \end{tabular}
 }
 
 % Define an environment for cvsubentry
@@ -712,7 +791,9 @@
 }
 % Define a subentry of cv information
 % Usage: \cvsubentry{<position>}{<title>}{<date>}{<description>}
+% TODO: Honestly, remove this..
 \newcommand*{\cvsubentry}[4]{%
+  \vspace{-3.0mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
@@ -731,6 +812,53 @@
 % Define an environment for cvhonor
 \newenvironment{cvhonors}{%
   \vspace{\acvSectionContentTopSkip}
+  \begin{center}
+    \setlength\tabcolsep{0pt}
+    \setlength{\extrarowheight}{0pt}
+    % Originally: \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{2.0cm} L{\textwidth - 6cm} R{4cm}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 2.5cm} R{2.5cm}}
+}{%
+    \end{tabular*}
+  \end{center}
+}
+% Define a line of cv information(honor, award or something else)
+% Usage: \cvhonor{<position>}{<title>}{<location>}{<date>}
+\newcommand*{\cvhonor}[3]{%
+  \honorpositionstyle{#1}\ifempty{#2}{}{,} \honortitlestyle{#2} & \honordatestyle{#3} \\
+}
+
+% Define an environment for cvskill
+\newenvironment{cvskills}{%
+  % Modified to left-align the left column, and generally have better vibes
+  \begin{tabular}{@{} p{1.2in} p{.9\textwidth - 1.2in} @{}}
+}{%
+  \end{tabular}
+
+  % NOTE: The blank line above is signifigant in a way that is unfathomable to mere man.
+}
+% Define a line of cv information(skill)
+% Usage: \cvskill{<type>}{<skillset>}
+\newcommand*{\cvskill}[2]{%
+	\skilltypestyle{#1} & \skillsetstyle{#2} \\
+}
+
+% Define an environment for cvitems(for cventry)
+\newenvironment{cvitems}{%
+  \vspace{-3.0mm}
+  \begin{justify}
+  \begin{itemize}[nosep, noitemsep] % TODO: Evaluate the no sep bit
+    %\setlength{\parskip}{0pt}
+    \renewcommand{\labelitemi}{\bullet}
+}{%
+  \end{itemize}
+  \end{justify}
+  \vspace{2.0mm}
+}
+
+% Define an environment for cvpublicspeaking, nearly identical to cvhonors,
+% but making it a little easier to modify in future.
+\newenvironment{cvpublicspeakings}{%
+  \vspace{\acvSectionContentTopSkip}
   \vspace{-2mm}
   \begin{center}
     \setlength\tabcolsep{0pt}
@@ -741,42 +869,10 @@
   \end{center}
 }
 % Define a line of cv information(honor, award or something else)
-% Usage: \cvhonor{<position>}{<title>}{<location>}{<date>}
-\newcommand*{\cvhonor}[4]{%
-  \honordatestyle{#4} & \honorpositionstyle{#1}\ifempty{#2}{}{,} \honortitlestyle{#2} & \honorlocationstyle{#3} \\
+% Usage: \cvpublicspeaking{<position>}{<title>}{<location>}{<date>}
+\newcommand*{\cvpublicspeaking}[4]{%
+  \speakingdatestyle{#4} & \speakingpositionstyle{#1}\ifempty{#2}{}{,} \speakingtitlestyle{#2} & \speakinglocationstyle{#3} \\
 }
-
-% Define an environment for cvskill
-\newenvironment{cvskills}{%
-  \vspace{\acvSectionContentTopSkip}
-  \vspace{-2.0mm}
-  \begin{center}
-    \setlength\tabcolsep{1ex}
-    \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.9}}}
-}{%
-    \end{tabular*}
-  \end{center}
-}
-% Define a line of cv information(skill)
-% Usage: \cvskill{<type>}{<skillset>}
-\newcommand*{\cvskill}[2]{%
-	\skilltypestyle{#1} & \skillsetstyle{#2} \\
-}
-
-% Define an environment for cvitems(for cventry)
-\newenvironment{cvitems}{%
-  \vspace{-4.0mm}
-  \begin{justify}
-  \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
-    \setlength{\parskip}{0pt}
-    \renewcommand{\labelitemi}{\bullet}
-}{%
-  \end{itemize}
-  \end{justify}
-  \vspace{1.0mm}
-}
-
 
 %-------------------------------------------------------------------------------
 %                Commands for elements of Cover Letter

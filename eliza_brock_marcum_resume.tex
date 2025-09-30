@@ -1,32 +1,43 @@
-\documentclass[line, margin, 10pt]{templates/res}
-\setlength{\parskip}{9pt}
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
 
-\topmargin=-0.25in
-\oddsidemargin -.25in
-\addtolength{\textwidth}{.25in}
-\addtolength{\textheight}{1in}
+% This version of my (Eliza Marcum's Resume) uses formatting
+% from Benoît Seignovert (https://github.com/seignovert/cv)
+% which in turn is based on the the Awesome CV LaTeX Template
+% from Claud D. Park: https://github.com/posquit0/Awesome-CV
 
+%-------------------------------------------------------------------------------
+
+% Needed to get the total number of pages.
+%
+% NOTE: If this doesn't work, remember that you have to run the
+% build twice, without deleting the .aux files in the interim!
+\RequirePackage{lastpage}
+
+\documentclass[11pt, letterpaper]{templates/awesome-cv}
+\geometry{left=1.8cm, top=.8cm, right=1.8cm, bottom=1.8cm, footskip=.5cm}
+
+\hypersetup{%
+  pdftitle={Eliza Brock Marcum Resume},
+  pdfauthor={Eliza Marcum}
+}
+
+% Color for highlights
+\colorlet{awesome}{awesome-nephritis}
+
+%-------------------------------------------------------------------------------
 \begin{document}
 
-\renewcommand{\namefont}{ \LARGE \bf }
-% \renewcommand{\titlefont}{ \bf }
-
-\name{Eliza Brock Marcum}
-\address{eliza@elizamarcum.com}
-\address{elizamarcum.com}
-\address{GitHub: @elizabrock}
-
-\begin{resume}
-
+\input{components/header_and_footer.tex}
 \input{components/summary.tex}
+\newbool{includeFullJobHistory}
+\setbool{includeFullJobHistory}{false}
 \input{components/experience.tex}
-\input{components/education.tex}
 \input{components/skills.tex}
-\input{components/community_involvement.tex}
-% TODO: Rearrange this information in future
-\input{components/honors.tex}
+\input{components/education.tex}
 \input{components/public_speaking.tex}
+\input{components/community_involvement.tex}
+\input{components/honors.tex}
 \input{components/activities.tex}
 
-\end{resume}
 \end{document}
