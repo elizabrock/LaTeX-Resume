@@ -178,7 +178,7 @@
 % NOTE: With xetex, ems perform as one would expect from experience in other areas: https://tex.stackexchange.com/a/97970
 
 \newcommand{\defaultbaselinespacing}{1.22em}
-\newcommand{\extrabaselinespacing}{1.71em}
+\newcommand{\extrabaselinespacing}{1.6em}
 
 \newcommand{\pageheaderfontsize}{32pt} % Leaving this in points, as I don't want it to scale with body font
 \newcommand{\headerfontsize}{14pt} % Leaving this in points, as I don't want it to scale with body font
@@ -217,14 +217,21 @@
 
 % Paragraphs
 \newcommand*{\paragraphstyle}{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\upshape\color{default-text-color}}
+\newcommand*{\titlestyle}{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{emphasized-text-color}}
+\newcommand*{\organizationstyle}{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{default-text-color}}
+\newcommand*{\datestyle}{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{emphasized-text-color}}
+\newcommand*{\locationstyle}{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{emphasized-text-color}}
+
+% TODO: I haven't sorted through these to find the identical entries, but I deeply wish to continue unpicking the symmetries.
+%\newcommand*{\defaultorganizationnamestyle}[1]{{\titlestyle #1}}
 
 % For elements of entry
-\newcommand*{\entrytitlestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{emphasized-text-color} #1}}
-\newcommand*{\entrycompanystyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{default-text-color} #1}}
-\newcommand*{\entrydatestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{emphasized-text-color} #1}}
-\newcommand*{\entrylocationstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{awesome-color} #1}}
+\newcommand*{\entrytitlestyle}[1]{{\titlestyle #1}}
+\newcommand*{\entryorganizationstyle}[1]{{\organizationstyle #1}}
+\newcommand*{\entrydatestyle}[1]{{\datestyle #1}}
+\newcommand*{\entrylocationstyle}[1]{{\locationstyle #1}}
 % TODO: Consider justifying this text, although \\justifying didn't seem to do the trick..
-\newcommand*{\entrycompanynotestyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{emphasized-text-color} #1}}
+\newcommand*{\entryorganizationnotestyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{emphasized-text-color} #1}}
 \newcommand*{\entrydescriptionstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\upshape\color{emphasized-text-color} #1}}
 
 % For elements of subentry
@@ -235,27 +242,27 @@
 \newcommand*{\subdescriptionstyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\upshape\color{default-text-color} #1}}
 
 % For elements of honor
-\newcommand*{\honortitlestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\color{emphasized-text-color} #1}}
-\newcommand*{\honorpositionstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\bfseries\color{emphasized-text-color} #1}}
-\newcommand*{\honordatestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{emphasized-text-color} #1}}
-\newcommand*{\honorlocationstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{awesome-color} #1}}
+\newcommand*{\honortitlestyle}[1]{{\titlestyle #1}}
+\newcommand*{\honororganizationstyle}[1]{{\organizationstyle #1}}
+\newcommand*{\honordatestyle}[1]{{\datestyle #1}}
+\newcommand*{\honorlocationstyle}[1]{{\locationstyle #1}}
 
 % OG
-\newcommand*{\speakingtitlestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\color{emphasized-text-color} #1}}
-\newcommand*{\speakingpositionstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\bfseries\color{emphasized-text-color} #1}}
-\newcommand*{\speakingdatestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{emphasized-text-color} #1}}
-\newcommand*{\speakinglocationstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{emphasized-text-color} #1}}
+\newcommand*{\speakingorganizationstyle}[1]{{\organizationstyle #1}}
+\newcommand*{\speakingpositionstyle}[1]{{\titlestyle\bodyfontlight #1}}
+\newcommand*{\speakingdatestyle}[1]{{\datestyle #1}}
+\newcommand*{\speakinglocationstyle}[1]{\locationstyle #1}
 
 % For elements of skill
-\newcommand*{\skilltypestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{emphasized-text-color} #1}}
-\newcommand*{\skillsetstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{default-text-color} #1}}
+\newcommand*{\skillcategorystyle}[1]{{\titlestyle #1}}
+\newcommand*{\skillsetstyle}[1]{{\organizationstyle #1}}
 
 % Cover Letter
 \newcommand*{\lettersectionstyle}[1]{{\sectionstyle{#1}}}
 \newcommand*{\recipientaddressstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\scshape\color{emphasized-text-color} #1}}
 \newcommand*{\recipienttitlestyle}[1]{{\fontsize{\largerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\scshape\color{default-text-color} #1}}
 \newcommand*{\lettertitlestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\bfseries\color{default-text-color} \underline{#1}}}
-\newcommand*{\letterdatestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{emphasized-text-color} #1}}
+\newcommand*{\letterdatestyle}[1]{{\datestyle\slshape #1}}
 \newcommand*{\lettertextstyle}{\fontsize{\defaultfontsize}{\extrabaselinespacing}\bodyfontlight\upshape\color{default-text-color}}
 \newcommand*{\letternamestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{default-text-color} #1}}
 \newcommand*{\letterenclosurestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{page-footer-color} #1}}
@@ -724,17 +731,17 @@
   \end{flushleft}
 }
 % Define an entry of cv information
-% Usage: \cventry{<title>}{<company/position>}{<location>}{<date>}{<note>}{<description>}
+% Usage: \cventry{<title>}{<organization/position>}{<location>}{<date>}{<note>}{<description>}
 \newcommand*{\cventry}[5]{%
   \epiccventry{#1}{#2}{}{}{#3}{}{#4}{#5}
 }
 
-% Usage: \cventrywithcompanynote{<title>}{<company/position>}{<company note>}{<location>}{<date>}{<note>}{<description>}
-\newcommand*{\cventrywithcompanynote}[6]{%
+% Usage: \cventrywithorganizationnote{<title>}{<organization/position>}{<organization note>}{<location>}{<date>}{<note>}{<description>}
+\newcommand*{\cventrywithorganizationnote}[6]{%
   \epiccventry{#1}{#2}{}{}{#3}{#4}{#5}{#6}
 }
 
-% Usage: \doublecventry{<title>}{<company/position>}{<additional title>}{<additional company/position>}{<location>}{<date>}{<note>}{<description>}
+% Usage: \doublecventry{<title>}{<organization/position>}{<additional title>}{<additional organization/position>}{<location>}{<date>}{<note>}{<description>}
 \newcommand*{\doublecventry}[7]{%
   \epiccventry{#1}{#2}{#3}{#4}{#5}{}{#6}{#7}
 }
@@ -745,28 +752,29 @@
   \@namedef{positionDate}{#2}%
   \@namedef{additionalPositionName}{#3}%
   \@namedef{additionalPositionDate}{#4}%
-  \@namedef{companyName}{#5}%
-  \@namedef{companyNote}{#6}%
+  \@namedef{organizationName}{#5}%
+  \@namedef{organizationNote}{#6}%
   \@namedef{location}{#7}%
   \@namedef{description}{#8}%
   \vspace{-2.0mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
+  % TODO: Figure out how to get the date on the two-line title to top align
   \begin{tabular}[t]{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-    \ifdefempty{\companyName}
+    \ifdefempty{\organizationName}
       {\entrytitlestyle{\positionName} & \entrydatestyle{\positionDate} \\}
-      {\entrytitlestyle{\positionName}, \entrycompanystyle{\companyName} & \entrydatestyle{\positionDate} \\}
+      {\entrytitlestyle{\positionName}, \entryorganizationstyle{\organizationName} & \entrydatestyle{\positionDate} \\}
     \ifdefempty{\additionalPositionName}
       {}
-      {\entrytitlestyle{\additionalPositionName}, \entrycompanystyle{\companyName} & \entrydatestyle{\additionalPositionDate} \\}
-    \ifdefempty{\companyNote}
+      {\entrytitlestyle{\additionalPositionName}, \entryorganizationstyle{\organizationName} & \entrydatestyle{\additionalPositionDate} \\}
+    \ifdefempty{\organizationNote}
       {}
-      % {\entrycompanynotestyle{\companyNote} & \\}
+      % {\entryorganizationnotestyle{\organizationNote} & \\}
       % The L here is why it is left aligned and not justified, I think..
-      % {\multicolumn{2}{L{\textwidth}}{\entrycompanynotestyle{\companyNote}} \\}
+      % {\multicolumn{2}{L{\textwidth}}{\entryorganizationnotestyle{\organizationNote}} \\}
       {\multicolumn{2}{L{\textwidth}}{
         \begin{tabular}[t]{L{.66\textwidth} R{.33\textwidth}}
-          \entrycompanynotestyle{\companyNote} & \\
+          \entryorganizationnotestyle{\organizationNote} & \\
         \end{tabular}
       } \\}
     \ifdefempty{\description}
@@ -781,13 +789,13 @@
   \@namedef{location}{#3}%
   \@namedef{date}{#4}%
   \@namedef{description}{#5}%
-  % TODO seperate this out into a table preamble command
+  % TODO separate this out into a table preamble command
   \vspace{-2.0mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular}[t]{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}} % TODO: Modularize this to share with the below so that changes are synced
     \entrytitlestyle{\degree} & \entrydatestyle{\date} \\
-    \entrycompanystyle{\university} & \\
+    \entryorganizationstyle{\university} & \\
     \multicolumn{2}{L{\textwidth}}{\entrydescriptionstyle{\description}} \\
   \end{tabular}
 }
@@ -831,9 +839,9 @@
   \end{center}
 }
 % Define a line of cv information(honor, award or something else)
-% Usage: \cvhonor{<position>}{<title>}{<location>}{<date>}
+% Usage: \cvhonor{<title>}{<organization / position>}{<location>}{<date>}
 \newcommand*{\cvhonor}[3]{%
-  \honorpositionstyle{#1}\ifempty{#2}{}{,} \honortitlestyle{#2} & \honordatestyle{#3} \\
+  \honortitlestyle{#1}\ifempty{#2}{}{,} \honororganizationstyle{#2} & \honordatestyle{#3} \\
 }
 
 % Define an environment for cvskill
@@ -844,11 +852,12 @@
   \end{tabular}
 
   % NOTE: The blank line above is signifigant in a way that is unfathomable to mere man.
+  % TODO: Figure that out!
 }
 % Define a line of cv information(skill)
 % Usage: \cvskill{<type>}{<skillset>}
 \newcommand*{\cvskill}[2]{%
-	\skilltypestyle{#1} & \skillsetstyle{#2} \\
+	\skillcategorystyle{#1} & \skillsetstyle{#2} \\
 }
 
 % Define an environment for cvitems(for cventry)
@@ -878,9 +887,9 @@
   \end{center}
 }
 % Define a line of cv information(honor, award or something else)
-% Usage: \cvpublicspeaking{<position>}{<title>}{<location>}{<date>}
+% Usage: \cvpublicspeaking{<title>}{<organization>}{<location>}{<date>}
 \newcommand*{\cvpublicspeaking}[4]{%
-  \speakingdatestyle{#4} & \speakingpositionstyle{#1}\ifempty{#2}{}{,} \speakingtitlestyle{#2} & \speakinglocationstyle{#3} \\
+  \speakingdatestyle{#4} & \speakingpositionstyle{#1}\ifempty{#2}{}{,} \speakingorganizationstyle{#2} & \speakinglocationstyle{#3} \\
 }
 
 %-------------------------------------------------------------------------------
