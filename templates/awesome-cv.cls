@@ -59,7 +59,7 @@
 % Needed to make header & footer efficiently
 \RequirePackage{fancyhdr}
 % Needed to manage colors
-\RequirePackage{xcolor}
+\RequirePackage[dvipsnames]{xcolor}
 % Needed to use \ifxetex-\else-\fi statement
 \RequirePackage{ifxetex}
 % Needed to use \if-\then-\else statement
@@ -88,6 +88,8 @@
 \RequirePackage[hidelinks,unicode,pdfpagelabels=false]{hyperref}
 % Solves issues Warning: File `cv.out' has changed
 \RequirePackage{bookmark}
+% For skill tagging!
+\RequirePackage{tcolorbox}
 
 %-------------------------------------------------------------------------------
 %                Configuration for directory locations
@@ -266,6 +268,57 @@
 \newcommand*{\lettertextstyle}{\fontsize{\defaultfontsize}{\extrabaselinespacing}\bodyfontlight\upshape\color{default-text-color}}
 \newcommand*{\letternamestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{default-text-color} #1}}
 \newcommand*{\letterenclosurestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{page-footer-color} #1}}
+
+
+%-------------------------------------------------------------------------------
+%                Setting Up Skill Tags
+%-------------------------------------------------------------------------------
+\tcbset{on line, boxsep=1pt, left=1pt,right=1pt,top=1pt,bottom=1pt,colframe=pink, colback=pink}
+\newcommand*{\myTag}[3]{\tcbox[colframe=#1, colback=#2]{#3}}
+
+\newcommand*{\tagFigma}{\myTag{Apricot}{White}{Figma}}
+\newcommand*{\tagPhotoshop}{\myTag{DarkOrchid}{White}{Photoshop}}
+\newcommand*{\tagAirtable}{\myTag{Mahogany}{White}{Airtable}}
+
+\newcommand*{\tagRuby}{\myTag{BrickRed}{White}{Ruby}}
+\newcommand*{\tagJekyll}{\myTag{BrickRed}{White}{Jekyll}}
+\newcommand*{\tagRails}{\myTag{RubineRed}{White}{Rails}}
+
+\newcommand*{\tagJavaScript}{\myTag{Emerald}{White}{JavaScript}}
+\newcommand*{\tagReact}{\myTag{OliveGreen}{White}{React}}
+
+\newcommand*{\tagHTML}{\myTag{GreenYellow}{White}{HTML}}
+\newcommand*{\tagHAML}{\myTag{ForestGreen}{White}{HAML}}
+
+\newcommand*{\tagCSS}{\myTag{Lavender}{White}{CSS}}
+\newcommand*{\tagSASS}{\myTag{Lavender}{White}{SASS}}
+
+\newcommand*{\tagMySQL}{\myTag{JungleGreen}{White}{MySQL}}
+\newcommand*{\tagMSSQL}{\myTag{JungleGreen}{White}{MS SQL}}
+\newcommand*{\tagPostgreSQL}{\myTag{JungleGreen}{White}{PostgreSQL}}
+\newcommand*{\tagSQLite}{\myTag{JungleGreen}{White}{SQLite}}
+\newcommand*{\tagRedis}{\myTag{JungleGreen}{White}{Redis}}
+\newcommand*{\tagMongoDB}{\myTag{JungleGreen}{White}{MongoDB}}
+
+\newcommand*{\tagXSLT}{\myTag{Gray}{White}{XSLT}}
+\newcommand*{\tagXML}{\myTag{Gray}{White}{XML}}
+
+\newcommand*{\tagPerl}{\myTag{Gray}{White}{Perl}}
+\newcommand*{\tagPHP}{\myTag{Gray}{White}{PHP}}
+\newcommand*{\tagPython}{\myTag{Gray}{White}{Python}}
+\newcommand*{\tagFlask}{\myTag{Gray}{White}{Flask}}
+
+\newcommand*{\tagCSharp}{\myTag{Gray}{White}{C\#}}
+\newcommand*{\tagCplusplus}{\myTag{Gray}{White}{C++}}
+\newcommand*{\tagJava}{\myTag{Gray}{White}{Java}}
+
+\newcommand*{\tagCustomerService}{\myTag{Gray}{White}{Customer Service}}
+\newcommand*{\tagManualQATesting}{\myTag{Gray}{White}{Manual Quality Assurance Testing}}
+\newcommand*{\tagPublicSpeaking}{\myTag{Gray}{White}{Public Speaking}}
+\newcommand*{\tagPM}{\myTag{Gray}{White}{Project Management}}
+
+\newcommand*{\tagDreamweaver}{\myTag{Gray}{White}{Dreamweaver}}
+
 
 
 %-------------------------------------------------------------------------------
