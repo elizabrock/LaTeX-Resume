@@ -3,10 +3,12 @@
 %
 % This class has been downloaded from:
 % https://github.com/posquit0/Awesome-CV
+% And subsequently highly modified and hosted at:
+% https://github.com/elizabrock/LaTeX-Resume
 %
-% Author:
+% Authors:
 % Claud D. Park <posquit0.bj@gmail.com>
-% http://www.posquit0.com
+% Eliza Marcum <eliza@elizamarcum.com>
 %
 % Notes:
 % 1) This class file defines the structure and layout of the template file (cv.tex, resume.tex).
@@ -121,6 +123,7 @@
 \definecolor{darkgray}{HTML}{333333}
 \definecolor{mediumgray}{HTML}{4f4f4f}
 \definecolor{gray}{HTML}{5D5D5D}
+\definecolor{notthelightestgray}{HTML}{6b6b6b}
 \definecolor{lightgray}{HTML}{999999}
 % Basic colors
 \definecolor{green}{HTML}{C2E15F}
@@ -142,22 +145,16 @@
 \definecolor{awesome-nephritis}{HTML}{27AE60}
 \definecolor{awesome-concrete}{HTML}{95A5A6}
 \definecolor{awesome-darknight}{HTML}{131A28}
-\colorlet{awesome}{awesome-red}
+\colorlet{awesome-color}{awesome-red}
 
 % Boolean value to switch section color highlighting
 \newbool{acvSectionColorHighlight}
 \setbool{acvSectionColorHighlight}{true}
 
-% Original version: Awesome section color
-%\def\@sectioncolor#1#2#3{%
-%  \ifbool{acvSectionColorHighlight}{{\color{awesome}#1#2#3}}{#1#2#3}%
-%}
-
 % @seignovert version of Awesome section color:
 \newcommand{\@sectioncolor}[1]{%
-	\ifbool{acvSectionColorHighlight}{{\color{awesome}#1}}{#1}%
+	\ifbool{acvSectionColorHighlight}{{\color{awesome-color}#1}}{#1}%
 }
-
 
 %-------------------------------------------------------------------------------
 %                Configuration for fonts
@@ -175,81 +172,93 @@
 % For fundamental structures
 
 % Font sizes have been converted to ems, with 9pt as the basis, given that that was the default
-% for most text, completely ignoring the font size specified in the letter class.
+% for most text.  The fixed text sizes original to awesome-cv completely ignored the font size
+% specified in the letter class. -EM
 
-% With xetex, ems perform as one would expect from experience in other areas: https://tex.stackexchange.com/a/97970
+% NOTE: With xetex, ems perform as one would expect from experience in other areas: https://tex.stackexchange.com/a/97970
 
-
-% NOTE: This is a WIP on regularizing the font sizes, colors, etc, that originated in awesome-cv
 \newcommand{\defaultbaselinespacing}{1.22em}
-  % Was 1em at 11pt default letter sizing, so I believe it should be 1.22em with 9pt as our baseline
 \newcommand{\extrabaselinespacing}{1.71em}
-  % Was 1.4em at 11pt default letter sizing, so I believe it should be 1.71em with 9pt as our baseline
-\newcommand{\headerfontsize}{32pt} % Leaving this in points, as I don't want it to scale with body font
-\newcommand{\slightlysmallheaderfontsize}{16pt} % Leaving this in points, as I don't want it to scale with body font
-\newcommand{\smallheaderfontsize}{14pt} % Leaving this in points, as I don't want it to scale with body font
-\newcommand{\smallestheaderfontsize}{1em} % Leaving this in points, as I don't want it to scale with body font
+
+\newcommand{\pageheaderfontsize}{32pt} % Leaving this in points, as I don't want it to scale with body font
+\newcommand{\headerfontsize}{14pt} % Leaving this in points, as I don't want it to scale with body font
+
 \newcommand{\largerthandefaultfontsize}{1.22em}
-\newcommand{\slightlylargerthandefaultfontsize}{1em} % was {1.11em} % TODO: Remove
 \newcommand{\defaultfontsize}{1em}
 \newcommand{\slightlysmallerthandefaultfontsize}{.88em}
-\newcommand{\slightlysmallererthandefaultfontsize}{.84em} % TODO: Remove this- I bet the difference is imperceptible
 \newcommand{\smallerthandefaultfontsize}{.77em}
 
-\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{\headerfontsize}{\defaultbaselinespacing}\headerfontlight\color{darkgray} #1}}
-\newcommand*{\headerlastnamestyle}[1]{{\fontsize{\headerfontsize}{\defaultbaselinespacing}\headerfont\bfseries\color{darkgray} #1}}
-\newcommand*{\headerpositionstyle}[1]{{\fontsize{\slightlysmallererthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\scshape\color{awesome} #1}}
-\newcommand*{\headeraddressstyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\headerfont\itshape\color{lighttext} #1}}
-\newcommand*{\headersocialstyle}[1]{{\fontsize{\smallerthandefaultfontsize}{\defaultbaselinespacing}\headerfont\color{graytext} #1}}
-\newcommand*{\headerquotestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\itshape\color{darkgray} #1}}
-\newcommand*{\footerstyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\footerfont\scshape\color{lighttext} #1}}
-\newcommand*{\sectionstyle}[1]{{\fontsize{\slightlysmallheaderfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{darktext}\@sectioncolor{#1}}}
-% ^The above line was modified to work with custom version of sectioncolor:
-\newcommand*{\subsectionstyle}[1]{{\fontsize{\smallestheaderfontsize}{\defaultbaselinespacing}\bodyfont\scshape\textcolor{darktext}{#1}}}
-\newcommand*{\paragraphstyle}{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\upshape\color{darktext}}
+
+% Color concepts: Page Header, Headings, Default, Attention
+\colorlet{page-header-heading-color}{darkgray}
+\colorlet{page-header-body-color}{graytext}
+\colorlet{page-header-deemphasized-color}{notthelightestgray}
+\colorlet{page-footer-color}{lighttext}
+
+\colorlet{heading-color}{darktext}
+\colorlet{subheading-color}{graytext}
+\colorlet{default-text-color}{darktext}
+\colorlet{emphasized-text-color}{graytext}
+
+% Headers
+\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{\pageheaderfontsize}{\defaultbaselinespacing}\headerfontlight\color{page-header-heading-color} #1}}
+\newcommand*{\headerlastnamestyle}[1]{{\fontsize{\pageheaderfontsize}{\defaultbaselinespacing}\headerfont\color{page-header-heading-color} #1}}
+\newcommand*{\headerpositionstyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\scshape\color{awesome-color} #1}}
+\newcommand*{\headeraddressstyle}[1]{{\fontsize{\smallerthandefaultfontsize}{\defaultbaselinespacing}\headerfont\color{page-header-deemphasized-color} #1}}
+\newcommand*{\headersocialstyle}[1]{{\fontsize{\smallerthandefaultfontsize}{\defaultbaselinespacing}\headerfont\color{page-header-body-color} #1}}
+\newcommand*{\headerquotestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\itshape\color{page-header-body-color} #1}}
+
+% Footers
+\newcommand*{\footerstyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\footerfont\scshape\color{page-footer-color} #1}}
+
+% Sections
+\newcommand*{\sectionstyle}[1]{{\fontsize{\headerfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{heading-color}\@sectioncolor{#1}}}
+\newcommand*{\subsectionstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\scshape\textcolor{subheading-color}{#1}}}
+
+% Paragraphs
+\newcommand*{\paragraphstyle}{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\upshape\color{default-text-color}}
 
 % For elements of entry
-\newcommand*{\entrytitlestyle}[1]{{\fontsize{\slightlylargerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{graytext} #1}}
-\newcommand*{\entrycompanystyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{darktext} #1}}
-\newcommand*{\entrydatestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{graytext} #1}}
-\newcommand*{\entrylocationstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{awesome} #1}}
+\newcommand*{\entrytitlestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{emphasized-text-color} #1}}
+\newcommand*{\entrycompanystyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{default-text-color} #1}}
+\newcommand*{\entrydatestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{emphasized-text-color} #1}}
+\newcommand*{\entrylocationstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{awesome-color} #1}}
 % TODO: Consider justifying this text, although \\justifying didn't seem to do the trick..
-\newcommand*{\entrycompanynotestyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{graytext} #1}}
-\newcommand*{\entrydescriptionstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\upshape\color{graytext} #1}}
+\newcommand*{\entrycompanynotestyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{emphasized-text-color} #1}}
+\newcommand*{\entrydescriptionstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\upshape\color{emphasized-text-color} #1}}
 
 % For elements of subentry
-\newcommand*{\subentrytitlestyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\mdseries\color{graytext} #1}}
-\newcommand*{\subentrypositionstyle}[1]{{\fontsize{\smallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\scshape\color{graytext} #1}}
-\newcommand*{\subentrydatestyle}[1]{{\fontsize{\smallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{graytext} #1}}
-\newcommand*{\subentrylocationstyle}[1]{{\fontsize{\smallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{awesome} #1}}
-\newcommand*{\subdescriptionstyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\upshape\color{darktext} #1}}
+\newcommand*{\subentrytitlestyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\mdseries\color{emphasized-text-color} #1}}
+\newcommand*{\subentrypositionstyle}[1]{{\fontsize{\smallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\scshape\color{emphasized-text-color} #1}}
+\newcommand*{\subentrydatestyle}[1]{{\fontsize{\smallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{emphasized-text-color} #1}}
+\newcommand*{\subentrylocationstyle}[1]{{\fontsize{\smallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{awesome-color} #1}}
+\newcommand*{\subdescriptionstyle}[1]{{\fontsize{\slightlysmallerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\upshape\color{default-text-color} #1}}
 
 % For elements of honor
-\newcommand*{\honortitlestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\color{graytext} #1}}
-\newcommand*{\honorpositionstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\bfseries\color{graytext} #1}}
-\newcommand*{\honordatestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{graytext} #1}}
-\newcommand*{\honorlocationstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{awesome} #1}}
+\newcommand*{\honortitlestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\color{emphasized-text-color} #1}}
+\newcommand*{\honorpositionstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\bfseries\color{emphasized-text-color} #1}}
+\newcommand*{\honordatestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{emphasized-text-color} #1}}
+\newcommand*{\honorlocationstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{awesome-color} #1}}
 
 % OG
-\newcommand*{\speakingtitlestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\color{graytext} #1}}
-\newcommand*{\speakingpositionstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\bfseries\color{graytext} #1}}
-\newcommand*{\speakingdatestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{graytext} #1}}
-\newcommand*{\speakinglocationstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{graytext} #1}}
+\newcommand*{\speakingtitlestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\color{emphasized-text-color} #1}}
+\newcommand*{\speakingpositionstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\bfseries\color{emphasized-text-color} #1}}
+\newcommand*{\speakingdatestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{emphasized-text-color} #1}}
+\newcommand*{\speakinglocationstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{emphasized-text-color} #1}}
 
 % For elements of skill
-\newcommand*{\skilltypestyle}[1]{{\fontsize{\slightlylargerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{graytext} #1}}
-\newcommand*{\skillsetstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{darktext} #1}}
+\newcommand*{\skilltypestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{emphasized-text-color} #1}}
+\newcommand*{\skillsetstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{default-text-color} #1}}
 
-% For elements of the cover letter
-\newcommand*{\lettersectionstyle}[1]{{\fontsize{\smallheaderfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{darktext}\@sectioncolor{#1}}}
-% ^The above line was modified to work with custom version of sectioncolor
-\newcommand*{\recipientaddressstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\scshape\color{graytext} #1}}
-\newcommand*{\recipienttitlestyle}[1]{{\fontsize{\largerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\lettertitlestyle}[1]{{\fontsize{\slightlylargerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\bfseries\color{darktext} \underline{#1}}}
-\newcommand*{\letterdatestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{graytext} #1}}
-\newcommand*{\lettertextstyle}{\fontsize{\defaultfontsize}{\extrabaselinespacing}\bodyfontlight\upshape\color{graytext}}
-\newcommand*{\letternamestyle}[1]{{\fontsize{\slightlylargerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\letterenclosurestyle}[1]{{\fontsize{\slightlylargerthandefaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{lighttext} #1}}
+% Cover Letter
+\newcommand*{\lettersectionstyle}[1]{{\sectionstyle{#1}}}
+\newcommand*{\recipientaddressstyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\scshape\color{emphasized-text-color} #1}}
+\newcommand*{\recipienttitlestyle}[1]{{\fontsize{\largerthandefaultfontsize}{\defaultbaselinespacing}\bodyfont\scshape\color{default-text-color} #1}}
+\newcommand*{\lettertitlestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\bfseries\color{default-text-color} \underline{#1}}}
+\newcommand*{\letterdatestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{emphasized-text-color} #1}}
+\newcommand*{\lettertextstyle}{\fontsize{\defaultfontsize}{\extrabaselinespacing}\bodyfontlight\upshape\color{default-text-color}}
+\newcommand*{\letternamestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{default-text-color} #1}}
+\newcommand*{\letterenclosurestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{page-footer-color} #1}}
 
 
 %-------------------------------------------------------------------------------
@@ -451,7 +460,7 @@
 \newcommand{\acvHeaderNameDelim}{\space}
 \newcommand{\acvHeaderAfterNameSkip}{.4mm}
 \newcommand{\acvHeaderAfterPositionSkip}{.4mm}
-\newcommand{\acvHeaderAfterAddressSkip}{-.5mm}
+\newcommand{\acvHeaderAfterAddressSkip}{0.25mm}
 \newcommand{\acvHeaderIconSep}{\space}
 \newcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
 \newcommand{\acvHeaderAfterSocialSkip}{6mm}
@@ -710,9 +719,9 @@
 % Define an environment for cventry
 \newenvironment{cventries}{%
   \vspace{\acvSectionContentTopSkip}
-  \begin{center}
+  \begin{flushleft}
 }{%
-  \end{center}
+  \end{flushleft}
 }
 % Define an entry of cv information
 % Usage: \cventry{<title>}{<company/position>}{<location>}{<date>}{<note>}{<description>}
@@ -897,14 +906,14 @@
 % Define a title of the cover letter
 % Usage: \makelettertitle
 \newcommand*{\makelettertitle}{%
-  \vspace{8.4mm}
+  \vspace{3mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
     \recipienttitlestyle{\@recipientname} & \letterdatestyle{\@letterdate}
   \end{tabular*}
   \begin{singlespace}
-    \recipientaddressstyle{\@recipientaddress} \\\\
+    \recipientaddressstyle{\@recipientaddress} \\
   \end{singlespace}
   \ifthenelse{\isundefined{\@lettertitle}}
     {}

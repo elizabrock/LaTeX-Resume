@@ -23,21 +23,26 @@
 }
 
 % Color for highlights
-\colorlet{awesome}{awesome-nephritis}
+\colorlet{awesome-color}{awesome-nephritis}
 
 %-------------------------------------------------------------------------------
 \begin{document}
 
-\input{components/header_and_footer.tex}
+\input{components/header.tex}
+% Print the header with above personal information
+% Give optional argument to change alignment(C: center, L: left, R: right)
+\makecvheader
+
+\newbool{includeFullHistory}
+\setbool{includeFullHistory}{false}
+\input{components/footer.tex}
 \input{components/summary.tex}
-\newbool{includeFullJobHistory}
-\setbool{includeFullJobHistory}{false}
 \input{components/experience.tex}
 \input{components/skills.tex}
 \input{components/education.tex}
-\input{components/public_speaking.tex}
-\input{components/community_involvement.tex}
 \input{components/honors.tex}
+\input{components/community_involvement.tex}
+\input{components/public_speaking.tex}
 \input{components/activities.tex}
 
 \end{document}

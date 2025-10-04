@@ -26,4 +26,5 @@ See the [releases section in GitHub](https://github.com/elizabrock/LaTeX-Resume/
 * Either update or remove the Activities section entirely
 * Evaluate reordering the resume sections
 * Try a more flamboyant color for what is currently green.  E.g. purple or hot pink!
-* Finally, release a new version
+* Make sure I've actually run spell-check
+* Finally, release a new version, compiled as final rather than draft
