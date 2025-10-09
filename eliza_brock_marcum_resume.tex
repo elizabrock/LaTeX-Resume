@@ -24,6 +24,7 @@
 
 % Color for highlights
 \colorlet{awesome-color}{awesome-nephritis}
+\input{components/tags.tex}
 
 %-------------------------------------------------------------------------------
 \begin{document}
@@ -37,8 +38,10 @@
 \setbool{includeFullHistory}{false}
 \input{components/footer.tex}
 \input{components/summary.tex}
-\input{components/experience.tex}
+% \input{components/palette.tex} % For debugging/adjusting color palettes
+\newcommand{\skillsSectionVariant}{rainbow} % Options: rainbow withSass
 \input{components/skills.tex}
+\input{components/experience.tex}
 \input{components/education.tex}
 \input{components/honors.tex}
 \input{components/community_involvement.tex}

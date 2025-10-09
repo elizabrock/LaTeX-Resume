@@ -1,18 +1,141 @@
 \cvsection{Skills}
-\begin{cvskills}
-	\cvskill
-  {In Production:}
-  { Ruby, Rails, JavaScript, HTML, CSS, XSLT, XML, MySQL, Post\nopagebreak[4]greSQL, Bash Shell Scripting, Linux, Heroku, Jekyll}
 
-  \cvskill
-  {In General:}
-  {\LaTeX, Photoshop, Canva, Squarespace}
+\skillTag{Gray}{white}{Current Skill} \skillTag{Gray}{pastSkillBackgroundColor}{Past Skill}
+\ifdefstring{\skillsSectionVariant}{rainbow}{
+  \begin{cvskills}
+    \cvskill
+    {Languages}
+    {
+      \tagRuby
+      \tagJavaScript
+      \tagHTML
+      \tagHAML
+      \tagCSS
+      \tagSASS
+      \tagXSLT
+      \tagXML
+      \tagBash
+      \tagLaTeX
+      \tagCSharp
+      \tagCplusplus
+      \tagJava
+      \tagLispScheme
+      \tagPHP
+      \tagPerl
+      \tagPython
+    }
 
-  \cvskill
-  {In The Past:}
-  {Haskell, Scheme, Erlang, Perl, PHP, Java, C++, C\#, MSSQL, Wordpress, Python, Flask, Figma}
+    \cvskill
+    {Frameworks}
+    {
+      \tagRails
+      \tagJekyll
+      \tagAngular
+      \tagFlask
+      \tagReact
+    }
+    % TODO: There are more frameworks from my past, like jQuery..
 
-  \cvskill
-  {Preferred Stack:}
-  {Rails, Haml, Sass, Test-Driven Development (TDD), Git, Pair Programming}
-\end{cvskills}
+    \cvskill
+    {Databases}
+    {
+      \tagAirtable
+      \tagPostgreSQL
+      \tagRedis
+      \tagSQLite
+      \tagMongoDB
+      \tagMSSQL
+      \tagMySQL
+    }
+
+    \cvskill
+    {Methodologies}
+    {
+      \tagCI
+      \tagPairProgramming
+      \tagResponsiveDesign
+      \tagTDD
+      \tagManualQATesting
+    }
+
+    \cvskill
+    {Human Skills}
+    {
+      \tagCustomerService
+      \tagPeopleManagement
+      \tagProjectManagement
+      \tagPublicSpeaking
+      \tagTeaching
+    }
+
+    \cvskill
+    {Visual Communication, Prototyping Tools, etc}
+    {
+      \tagBalsamiq
+      \tagCanva
+      \tagFigma
+      \tagPhotoshop
+      \tagGit
+    }
+  \end{cvskills}
+}{}
+\ifdefstring{\skillsSectionVariant}{withSass}{
+  \begin{cvskills}
+    \cvskill
+    {Figuring It Out}
+    {
+      \tagAirtable
+      \tagProjectManagement
+      \tagTeaching
+      \tagFigma
+      \tagBalsamiq
+      \tagPhotoshop
+    }
+
+    \cvskill
+    {Making It Happen}
+    {
+      \tagRuby
+      \tagJavaScript
+      \tagHTML
+      \tagCSS
+      \tagXSLT
+      \tagXML
+      \tagJekyll
+      \tagRails
+      \tagPostgreSQL
+      \tagRedis
+      \tagAccessibility
+      \tagResponsiveDesign
+      \tagMySQL
+    }
+
+    \cvskill
+    {Making It Happen On Time, Even}
+    {
+      \tagCI
+      \tagTDD
+      \tagCustomerService
+      \tagPeopleManagement
+      \tagProjectManagement
+      \tagPublicSpeaking
+    }
+
+    \cvskill
+    {Can Do, Do Not Particularly Want To Do}
+    {
+      \tagCSharp
+      \tagCplusplus
+      \tagJava
+      \tagPHP
+      \tagPerl
+      \tagPython
+      \tagAngular
+      \tagFlask
+      \tagReact
+      \tagMongoDB
+      \tagMSSQL
+      \tagManualQATesting
+    }
+  \end{cvskills}
+}{}

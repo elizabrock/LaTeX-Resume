@@ -59,7 +59,7 @@
 % Needed to make header & footer efficiently
 \RequirePackage{fancyhdr}
 % Needed to manage colors
-\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage[dvipsnames,table]{xcolor}
 % Needed to use \ifxetex-\else-\fi statement
 \RequirePackage{ifxetex}
 % Needed to use \if-\then-\else statement
@@ -88,8 +88,6 @@
 \RequirePackage[hidelinks,unicode,pdfpagelabels=false]{hyperref}
 % Solves issues Warning: File `cv.out' has changed
 \RequirePackage{bookmark}
-% For skill tagging!
-\RequirePackage{tcolorbox}
 
 %-------------------------------------------------------------------------------
 %                Configuration for directory locations
@@ -148,6 +146,21 @@
 \definecolor{awesome-concrete}{HTML}{95A5A6}
 \definecolor{awesome-darknight}{HTML}{131A28}
 \colorlet{awesome-color}{awesome-red}
+
+%% Tag Colors %%
+
+% To visualize the color palette and its suitability for color blindness, use:
+% https://projects.susielu.com/viz-palette?colors=[%22#bebebe%22,%22#949698%22,%22#423790%22,%22#840067%22,%22#ea5f94%22,%22#f97e44%22,%22#fdbc42%22,%22#ffd700%22,%22#98cc70%22,%22#006eb8%22]&backgroundColor=%22white%22&fontColor=%22black%22&mode=%22normal%22
+
+\definecolor{tagBlueViolet}{HTML}{423790} % Equivalent of tagPurple!50!tagBlue; Halfway between purple and blue
+\definecolor{tagPurple}{HTML}{840067}
+\definecolor{tagPink}{HTML}{ea5f94}
+\definecolor{tagOrange}{HTML}{F97E44}
+\definecolor{tagYellow}{HTML}{ffd700}
+\definecolor{tagGreen}{HTML}{98CC70} % YellowGreen
+\definecolor{tagBlue}{HTML}{006EB8} % NavyBlue
+\colorlet{tagGray}{Gray}
+\definecolor{tagPaleGray}{HTML}{fafafa}
 
 % Boolean value to switch section color highlighting
 \newbool{acvSectionColorHighlight}
@@ -268,57 +281,6 @@
 \newcommand*{\lettertextstyle}{\fontsize{\defaultfontsize}{\extrabaselinespacing}\bodyfontlight\upshape\color{default-text-color}}
 \newcommand*{\letternamestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfont\bfseries\color{default-text-color} #1}}
 \newcommand*{\letterenclosurestyle}[1]{{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\slshape\color{page-footer-color} #1}}
-
-
-%-------------------------------------------------------------------------------
-%                Setting Up Skill Tags
-%-------------------------------------------------------------------------------
-\tcbset{on line, boxsep=1pt, left=1pt,right=1pt,top=1pt,bottom=1pt,colframe=pink, colback=pink}
-\newcommand*{\myTag}[3]{\tcbox[colframe=#1, colback=#2]{#3}}
-
-\newcommand*{\tagFigma}{\myTag{Apricot}{White}{Figma}}
-\newcommand*{\tagPhotoshop}{\myTag{DarkOrchid}{White}{Photoshop}}
-\newcommand*{\tagAirtable}{\myTag{Mahogany}{White}{Airtable}}
-
-\newcommand*{\tagRuby}{\myTag{BrickRed}{White}{Ruby}}
-\newcommand*{\tagJekyll}{\myTag{BrickRed}{White}{Jekyll}}
-\newcommand*{\tagRails}{\myTag{RubineRed}{White}{Rails}}
-
-\newcommand*{\tagJavaScript}{\myTag{Emerald}{White}{JavaScript}}
-\newcommand*{\tagReact}{\myTag{OliveGreen}{White}{React}}
-
-\newcommand*{\tagHTML}{\myTag{GreenYellow}{White}{HTML}}
-\newcommand*{\tagHAML}{\myTag{ForestGreen}{White}{HAML}}
-
-\newcommand*{\tagCSS}{\myTag{Lavender}{White}{CSS}}
-\newcommand*{\tagSASS}{\myTag{Lavender}{White}{SASS}}
-
-\newcommand*{\tagMySQL}{\myTag{JungleGreen}{White}{MySQL}}
-\newcommand*{\tagMSSQL}{\myTag{JungleGreen}{White}{MS SQL}}
-\newcommand*{\tagPostgreSQL}{\myTag{JungleGreen}{White}{PostgreSQL}}
-\newcommand*{\tagSQLite}{\myTag{JungleGreen}{White}{SQLite}}
-\newcommand*{\tagRedis}{\myTag{JungleGreen}{White}{Redis}}
-\newcommand*{\tagMongoDB}{\myTag{JungleGreen}{White}{MongoDB}}
-
-\newcommand*{\tagXSLT}{\myTag{Gray}{White}{XSLT}}
-\newcommand*{\tagXML}{\myTag{Gray}{White}{XML}}
-
-\newcommand*{\tagPerl}{\myTag{Gray}{White}{Perl}}
-\newcommand*{\tagPHP}{\myTag{Gray}{White}{PHP}}
-\newcommand*{\tagPython}{\myTag{Gray}{White}{Python}}
-\newcommand*{\tagFlask}{\myTag{Gray}{White}{Flask}}
-
-\newcommand*{\tagCSharp}{\myTag{Gray}{White}{C\#}}
-\newcommand*{\tagCplusplus}{\myTag{Gray}{White}{C++}}
-\newcommand*{\tagJava}{\myTag{Gray}{White}{Java}}
-
-\newcommand*{\tagCustomerService}{\myTag{Gray}{White}{Customer Service}}
-\newcommand*{\tagManualQATesting}{\myTag{Gray}{White}{Manual Quality Assurance Testing}}
-\newcommand*{\tagPublicSpeaking}{\myTag{Gray}{White}{Public Speaking}}
-\newcommand*{\tagPM}{\myTag{Gray}{White}{Project Management}}
-
-\newcommand*{\tagDreamweaver}{\myTag{Gray}{White}{Dreamweaver}}
-
 
 
 %-------------------------------------------------------------------------------
@@ -912,6 +874,21 @@
 \newcommand*{\cvskill}[2]{%
 	\skillcategorystyle{#1} & \skillsetstyle{#2} \\
 }
+
+% Define an environment for cvtags
+\newcommand*{\cvtags}[1]{
+  % TODO: Fix this superstition
+  \vspace{\acvSectionContentTopSkip}
+  #1 %
+}
+
+\tcbset{on line, box align=bottom, valign=top, boxrule=1pt, boxsep=1pt, right skip=0.25em, left skip=0pt, left=3pt,right=3pt,top=1.5pt,bottom=1.5pt,colframe=pink, colback=pink}
+\newcommand*{\backgroundedSkillTag}[3]{ %
+  \colorlet{BackgroundMixed}{#1!50!tagPaleGray}%
+  \colorlet{PaleBackground}{BackgroundMixed!4}%
+  \skillTag{#1}{BackgroundMixed}{#3}
+  }
+\newcommand*{\skillTag}[3]{\tcbox[colframe=#1, colback=#2]{\vphantom{Äg}#3} }
 
 % Define an environment for cvitems(for cventry)
 \newenvironment{cvitems}{%

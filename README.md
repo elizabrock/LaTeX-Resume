@@ -3,6 +3,8 @@ which in turn is based on the the Awesome CV LaTeX Template from Claud D. Park: 
 
 I have made some significant changes to the formatting inherited from awesome-cv, and I am in the process of regularizing the formatting into a more Latex way of being.
 
+I was also inspired by the skill tagging from [Stéphane Guedon's Resume](https://www.overleaf.com/project/5ccd465312946b32add4a506).
+
 
 You can generate the PDF from the LaTeX file by running `make`.
   * Adjust the boolean `includeFullJobHistory` if you wish to include the full job history.
