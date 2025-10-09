@@ -497,6 +497,7 @@
 %                Commands for utilities
 %-------------------------------------------------------------------------------
 % Use to align an element of tabular table
+\newcolumntype{Z}[1]{>{\raggedright\let\newline\\\arraybackslash}p{#1}}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -506,7 +507,6 @@
 
 % Use to execute conditional statements by checking empty string
 \newcommand*{\ifempty}[3]{\ifthenelse{\isempty{#1}}{#2}{#3}}
-
 
 %-------------------------------------------------------------------------------
 %                Commands for elements of CV structure
@@ -746,32 +746,28 @@
   \end{flushleft}
 }
 % Define an entry of cv information
-% Usage: \cventry{<title>}{<organization/position>}{<location>}{<date>}{<note>}{<description>}
+% Usage: \cventry{<title>}{<date>}{<organization/position>}<{location}>{<description>}
 \newcommand*{\cventry}[5]{%
-  \epiccventry{#1}{#2}{}{}{#3}{}{#4}{#5}
+  \doublecventry{#1}{#2}{#3}{}{}{}{}{#4}{#5}
 }
 
-% Usage: \cventrywithorganizationnote{<title>}{<organization/position>}{<organization note>}{<location>}{<date>}{<note>}{<description>}
+% Usage: \cventrywithorganizationnote{<title>}{<date>}{<organization/position>}{<note>}{<location>}{<description>}
 \newcommand*{\cventrywithorganizationnote}[6]{%
-  \epiccventry{#1}{#2}{}{}{#3}{#4}{#5}{#6}
+  \doublecventry{#1}{#2}{#3}{}{}{}{#4}{#5}{#6}
 }
 
-% Usage: \doublecventry{<title>}{<organization/position>}{<additional title>}{<additional organization/position>}{<location>}{<date>}{<note>}{<description>}
-\newcommand*{\doublecventry}[7]{%
-  \epiccventry{#1}{#2}{#3}{#4}{#5}{}{#6}{#7}
-}
-
-% Internal Usage:
-\newcommand*{\epiccventry}[8]{%
+% Usage: \doublecventry{<title>}{<date>}{<company>}{<additional title>}{<additional date>}{<additional company>}{<note>}{<location>}{<description>}
+\newcommand*{\doublecventry}[9]{%
   \@namedef{positionName}{#1}%
   \@namedef{positionDate}{#2}%
-  \@namedef{additionalPositionName}{#3}%
-  \@namedef{additionalPositionDate}{#4}%
-  \@namedef{organizationName}{#5}%
-  \@namedef{organizationNote}{#6}%
-  \@namedef{location}{#7}%
-  \@namedef{description}{#8}%
-  \vspace{-2.0mm}
+  \@namedef{organizationName}{#3}%
+  \@namedef{additionalPositionName}{#4}%
+  \@namedef{additionalPositionDate}{#5}%
+  \@namedef{additionalOrganizationName}{#6}%
+  \@namedef{organizationNote}{#7}%
+  \@namedef{location}{#8}%
+  \@namedef{description}{#9}%
+  \vspace{-1.0mm} % This seems to get the tabular lined up.
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   % TODO: Figure out how to get the date on the two-line title to top align
@@ -781,14 +777,14 @@
       {\entrytitlestyle{\positionName}, \entryorganizationstyle{\organizationName} & \entrydatestyle{\positionDate} \\}
     \ifdefempty{\additionalPositionName}
       {}
-      {\entrytitlestyle{\additionalPositionName}, \entryorganizationstyle{\organizationName} & \entrydatestyle{\additionalPositionDate} \\}
+      {\entrytitlestyle{\additionalPositionName}, \entryorganizationstyle{\additionalOrganizationName} & \entrydatestyle{\additionalPositionDate} \\}
     \ifdefempty{\organizationNote}
       {}
       % {\entryorganizationnotestyle{\organizationNote} & \\}
       % The L here is why it is left aligned and not justified, I think..
       % {\multicolumn{2}{L{\textwidth}}{\entryorganizationnotestyle{\organizationNote}} \\}
       {\multicolumn{2}{L{\textwidth}}{
-        \begin{tabular}[t]{L{.66\textwidth} R{.33\textwidth}}
+        \begin{tabular}[t]{L{.75\textwidth} R{.25\textwidth}}
           \entryorganizationnotestyle{\organizationNote} & \\
         \end{tabular}
       } \\}
@@ -798,19 +794,27 @@
   \end{tabular}%
 }
 
-\newcommand*{\cveducationentry}[5]{%
+\newcommand*{\cveducationentry}[6]{%
   \@namedef{degree}{#1}%
   \@namedef{university}{#2}%
-  \@namedef{location}{#3}%
-  \@namedef{date}{#4}%
-  \@namedef{description}{#5}%
+  \@namedef{note}{#3}%
+  \@namedef{location}{#4}%
+  \@namedef{date}{#5}%
+  \@namedef{description}{#6}%
   % TODO separate this out into a table preamble command
-  \vspace{-2.0mm}
+  \vspace{-1.0mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular}[t]{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}} % TODO: Modularize this to share with the below so that changes are synced
     \entrytitlestyle{\degree} & \entrydatestyle{\date} \\
     \entryorganizationstyle{\university} & \\
+    \ifdefempty{\note}
+      {}
+      {\multicolumn{2}{L{\textwidth}}{
+        \begin{tabular}[t]{L{.66\textwidth} R{.33\textwidth}}
+          \entryorganizationnotestyle{\note} & \\
+        \end{tabular}
+      } \\}
     \multicolumn{2}{L{\textwidth}}{\entrydescriptionstyle{\description}} \\
   \end{tabular}
 }
@@ -847,7 +851,6 @@
   \begin{center}
     \setlength\tabcolsep{0pt}
     \setlength{\extrarowheight}{0pt}
-    % Originally: \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{2.0cm} L{\textwidth - 6cm} R{4cm}}
     \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 2.5cm} R{2.5cm}}
 }{%
     \end{tabular*}
@@ -861,13 +864,15 @@
 
 % Define an environment for cvskill
 \newenvironment{cvskills}{%
-  % Modified to left-align the left column, and generally have better vibes
-  \begin{tabular}{@{} p{1.2in} p{.9\textwidth - 1.2in} @{}}
+  \vspace{\acvSectionContentTopSkip}
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{flushleft}
+    % For alignment debugging: \rowcolors{2}{gray!25}{white}
+    \begin{tabular*}{\textwidth}{Z{2in} Z{.9\textwidth - 2in} @{\extracolsep{\fill}}}
 }{%
-  \end{tabular}
-
-  % NOTE: The blank line above is signifigant in a way that is unfathomable to mere man.
-  % TODO: Figure that out!
+    \end{tabular*}
+  \end{flushleft}
 }
 % Define a line of cv information(skill)
 % Usage: \cvskill{<type>}{<skillset>}
@@ -907,7 +912,7 @@
 % but making it a little easier to modify in future.
 \newenvironment{cvpublicspeakings}{%
   \vspace{\acvSectionContentTopSkip}
-  \vspace{-2mm}
+  \vspace{-1.0mm}
   \begin{center}
     \setlength\tabcolsep{0pt}
     \setlength{\extrarowheight}{0pt}

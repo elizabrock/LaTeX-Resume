@@ -29,4 +29,5 @@ See the [releases section in GitHub](https://github.com/elizabrock/LaTeX-Resume/
 * Evaluate reordering the resume sections
 * Try a more flamboyant color for what is currently green.  E.g. purple or hot pink!
 * Make sure I've actually run spell-check
+* Set up preview images a la https://github.com/seignovert/cv/tree/main/cv
 * Finally, release a new version, compiled as final rather than draft
