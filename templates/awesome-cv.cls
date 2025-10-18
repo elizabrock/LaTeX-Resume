@@ -159,7 +159,7 @@
 \definecolor{tagYellow}{HTML}{ffd700}
 \definecolor{tagGreen}{HTML}{98CC70} % YellowGreen
 \definecolor{tagBlue}{HTML}{006EB8} % NavyBlue
-\colorlet{tagGray}{Gray}
+\colorlet{tagGray}{Gray} % 949698
 \definecolor{tagPaleGray}{HTML}{fafafa}
 
 % Boolean value to switch section color highlighting
@@ -174,6 +174,11 @@
 %-------------------------------------------------------------------------------
 %                Configuration for fonts
 %-------------------------------------------------------------------------------
+
+% Reference on fonts:
+%  * https://www.tug.org/FontCatalogue/sourcesanspro/
+%  * https://tex.stackexchange.com/questions/633498/how-to-use-extralight-semibold-black-fonts-of-the-source-sans-pro-typeface
+
 \newcommand*{\headerfont}{\roboto}
 \newcommand*{\headerfontlight}{\robotolight}
 \newcommand*{\footerfont}{\sourcesanspro}
@@ -269,8 +274,9 @@
 \newcommand*{\speakinglocationstyle}[1]{\locationstyle #1}
 
 % For elements of skill
-\newcommand*{\skillcategorystyle}[1]{{\titlestyle #1}}
-\newcommand*{\skillsetstyle}[1]{{\organizationstyle #1}}
+\newcommand*{\skilltagstyle}[1]{\fontsize{\defaultfontsize}{\defaultbaselinespacing}\bodyfontlight\color{default-text-color} #1}
+\newcommand*{\skillcategorystyle}[1]{{\titlestyle\fontsize{\defaultfontsize}{\defaultbaselinespacing} #1}}
+\newcommand*{\skillsetstyle}[1]{{\color{default-text-color} #1}}
 
 % Cover Letter
 \newcommand*{\lettersectionstyle}[1]{{\sectionstyle{#1}}}
@@ -767,7 +773,7 @@
   \@namedef{organizationNote}{#7}%
   \@namedef{location}{#8}%
   \@namedef{description}{#9}%
-  \vspace{-1.0mm} % This seems to get the tabular lined up.
+  \vspace{-1.0mm} % This seems to get the tabular lined up.  TODO- Figure out if this could be a setting on tabular..
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   % TODO: Figure out how to get the date on the two-line title to top align
@@ -864,12 +870,14 @@
 
 % Define an environment for cvskill
 \newenvironment{cvskills}{%
-  \vspace{\acvSectionContentTopSkip}
+  \vspace{-0.5mm}
   \setlength\tabcolsep{0pt}
+  \renewcommand{\arraystretch}{0.4}
   \setlength{\extrarowheight}{0pt}
   \begin{flushleft}
-    % For alignment debugging: \rowcolors{2}{gray!25}{white}
-    \begin{tabular*}{\textwidth}{Z{2in} Z{.9\textwidth - 2in} @{\extracolsep{\fill}}}
+    % For alignment debugging:
+    % \rowcolors{1}{gray!25}{gray}
+    \begin{tabular*}{\textwidth}{Z{1.25in} Z{\textwidth - 1.25in} @{\extracolsep{\fill}}}
 }{%
     \end{tabular*}
   \end{flushleft}
@@ -882,18 +890,20 @@
 
 % Define an environment for cvtags
 \newcommand*{\cvtags}[1]{
-  % TODO: Fix this superstition
-  \vspace{\acvSectionContentTopSkip}
-  #1 %
+  \vspace{0.25mm}
+  \begin{flushleft}
+    #1
+  \end{flushleft}
 }
 
-\tcbset{on line, box align=bottom, valign=top, boxrule=1pt, boxsep=1pt, right skip=0.25em, left skip=0pt, left=3pt,right=3pt,top=1.5pt,bottom=1.5pt,colframe=pink, colback=pink}
+% tcolorbox manual: https://ctan.mirrors.hoobly.com/macros/latex/contrib/tcolorbox/tcolorbox.pdf
+\tcbset{on line, box align=bottom, enlarge bottom by=0.2em, valign=top, boxrule=1pt, boxsep=1pt, right skip=0.2em, left skip=0pt, left=3pt,right=3pt,top=1.5pt,bottom=1.5pt,colframe=pink, colback=pink}
 \newcommand*{\backgroundedSkillTag}[3]{ %
   \colorlet{BackgroundMixed}{#1!50!tagPaleGray}%
   \colorlet{PaleBackground}{BackgroundMixed!4}%
   \skillTag{#1}{BackgroundMixed}{#3}
   }
-\newcommand*{\skillTag}[3]{\tcbox[colframe=#1, colback=#2]{\vphantom{Äg}#3} }
+\newcommand*{\skillTag}[3]{\tcbox[colframe=#1, colback=#2]{\skilltagstyle{\vphantom{Äg}#3}} }
 
 % Define an environment for cvitems(for cventry)
 \newenvironment{cvitems}{%

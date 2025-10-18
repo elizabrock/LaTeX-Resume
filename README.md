@@ -12,22 +12,18 @@ You can generate the PDF from the LaTeX file by running `make`.
 
 See the [releases section in GitHub](https://github.com/elizabrock/LaTeX-Resume/releases) for the downloadable PDF version of my resume.
 
-## TODOs
+## 2025 TODOs
 
-* Add skills tagging to the experience entries
-  * Consider the way that @seignovert or others organized their skills
-  * Make updates to the skills section as we tag the skills on the next leg-
-    * As we list the skill in the experience section, lay it out in the skills section and see what the natural grouping turns out to be.
 * Add in a selected projects section! iGoDigital, GitLab, This Resume, typesetting The Rails 3 Way etc.
 * Find a better way to list the subentries in the Education section
 * Add links to the experience section where relevant
-* Seriously consider removing IEEE CSDA from the list, despite its comical nature
 * Figure out the extra bit of whitespace above the "Public Speaking" section
-* Take another pass at the skill section- Add additional from LinkedIn, alphabetize, etc.
-* Maybe also, all the modern CMS systems, etc to the skills? Even though it isn't strictly engineering?
 * Either update or remove the Activities section entirely
 * Evaluate reordering the resume sections
 * Try a more flamboyant color for what is currently green.  E.g. purple or hot pink!
-* Make sure I've actually run spell-check
+* Make sure I've actually run spell-check (https://paulwintz.com/latex-in-vscode/#ltex-spell-checking-and-grammar-checking-for-latex may help)
 * Set up preview images a la https://github.com/seignovert/cv/tree/main/cv
 * Finally, release a new version, compiled as final rather than draft
+
+
+### Someday / Later

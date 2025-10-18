@@ -1,3 +1,5 @@
+% TODO: This should probably be a .sty file: https://www.overleaf.com/learn/latex/Understanding_packages_and_class_files
+
 % My Color Choices
 \colorlet{languageColor}{tagBlueViolet}
 \colorlet{oldLanguageColor}{languageColor}
@@ -6,8 +8,8 @@
 \colorlet{databasesColor}{tagOrange}
 \colorlet{methodologiesColor}{tagYellow}
 \colorlet{humanSkillsColor}{tagGreen}
-\colorlet{visualToolsColor}{tagBlue} % FDBC42; Apricot was also an option
-\colorlet{generalToolsColor}{tagGray} % was Dandelion / FDBC42; Apricot was also an option
+\colorlet{visualToolsColor}{tagBlue}
+\colorlet{generalToolsColor}{tagGray}
 \definecolor{pastSkillBackgroundColor}{HTML}{F1F1F1}
 
 % Languages
@@ -34,13 +36,13 @@
 
 % Frameworks
 \newcommand*{\tagRails}{\skillTag{frameworksColor}{White}{Rails}}
-\newcommand*{\tagWordpress}{\skillTag{frameworksColor}{pastSkillBackgroundColor}{Wordpress}}
 
 \newcommand*{\tagAngular}{\skillTag{frameworksColor}{pastSkillBackgroundColor}{Angular}}
 \newcommand*{\tagReact}{\skillTag{frameworksColor}{pastSkillBackgroundColor}{React}}
 
 \newcommand*{\tagFlask}{\skillTag{frameworksColor}{pastSkillBackgroundColor}{Flask}}
 \newcommand*{\tagJekyll}{\skillTag{frameworksColor}{White}{Jekyll}}
+\newcommand*{\tagWordpress}{\skillTag{frameworksColor}{pastSkillBackgroundColor}{Wordpress}}
 
 % Databases
 \newcommand*{\tagAirtable}{\skillTag{databasesColor}{White}{Airtable}}
@@ -53,11 +55,14 @@
 
 % Methodologies
 \newcommand*{\tagAccessibility}{\skillTag{methodologiesColor}{White}{Accessibility}}
-\newcommand*{\tagCI}{\skillTag{methodologiesColor}{White}{Continuous Integration (CI)}}
+\newcommand*{\tagCI}{\skillTag{methodologiesColor}{White}{CI (Continuous Integration)}}
+\newcommand*{\tagCIShort}{\skillTag{methodologiesColor}{White}{CI}}
 \newcommand*{\tagManualQATesting}{\skillTag{methodologiesColor}{pastSkillBackgroundColor}{Manual Quality Assurance Testing}}
+\newcommand*{\tagManualQATestingShort}{\skillTag{methodologiesColor}{pastSkillBackgroundColor}{Manual QA Testing}}
 \newcommand*{\tagPairProgramming}{\skillTag{methodologiesColor}{White}{Pair Programming}}
 \newcommand*{\tagResponsiveDesign}{\skillTag{methodologiesColor}{White}{Responsive Web Design}}
-\newcommand*{\tagTDD}{\skillTag{methodologiesColor}{White}{Test-Driven Development (TDD)}}
+\newcommand*{\tagTDD}{\skillTag{methodologiesColor}{White}{TDD (Test-Driven Development)}}
+\newcommand*{\tagTDDShort}{\skillTag{methodologiesColor}{White}{TDD}}
 
 % Testing Tools
 \newcommand*{\tagMinitest}{\skillTag{methodologiesColor}{White}{Minitest}}
@@ -74,6 +79,7 @@
 
 % People Skills
 \newcommand*{\tagCustomerService}{\skillTag{humanSkillsColor}{White}{Customer Service}}
+\newcommand*{\tagECommerce}{\skillTag{humanSkillsColor}{White}{eCommerce}}
 \newcommand*{\tagPeopleManagement}{\skillTag{humanSkillsColor}{White}{People Management}}
 \newcommand*{\tagProjectManagement}{\skillTag{humanSkillsColor}{White}{Project Management}}
 \newcommand*{\tagPublicSpeaking}{\skillTag{humanSkillsColor}{White}{Public Speaking}}
