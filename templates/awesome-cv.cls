@@ -150,7 +150,7 @@
 %% Tag Colors %%
 
 % To visualize the color palette and its suitability for color blindness, use:
-% https://projects.susielu.com/viz-palette?colors=[%22#bebebe%22,%22#949698%22,%22#423790%22,%22#840067%22,%22#ea5f94%22,%22#f97e44%22,%22#fdbc42%22,%22#ffd700%22,%22#98cc70%22,%22#006eb8%22]&backgroundColor=%22white%22&fontColor=%22black%22&mode=%22normal%22
+% https://projects.susielu.com/viz-palette?colors=[%22#423790%22,%22#840067%22,%22#ea5f94%22,%22#f97e44%22,%22#ffd700%22,%22#98cc70%22,%22#006eb8%22,%22#949698%22,%22#bebebe%22]&backgroundColor=%22white%22&fontColor=%22black%22&mode=%22normal%22
 
 \definecolor{tagBlueViolet}{HTML}{423790} % Equivalent of tagPurple!50!tagBlue; Halfway between purple and blue
 \definecolor{tagPurple}{HTML}{840067}
@@ -894,6 +894,7 @@
   \begin{flushleft}
     #1
   \end{flushleft}
+  \vspace{0.75mm}
 }
 
 % tcolorbox manual: https://ctan.mirrors.hoobly.com/macros/latex/contrib/tcolorbox/tcolorbox.pdf
@@ -909,7 +910,8 @@
 \newenvironment{cvitems}{%
   \vspace{-3.0mm}
   \begin{justify}
-  \begin{itemize}[nosep, noitemsep] % TODO: Evaluate the no sep bit
+  \begin{itemize}
+    \setlength{\itemsep}{0.25em}
     %\setlength{\parskip}{0pt}
     \renewcommand{\labelitemi}{\bullet}
 }{%
